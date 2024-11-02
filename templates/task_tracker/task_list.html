@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<ul>
     {% for task in tasks %}
-        <a href="{% url 'task_detail' task.pk %}"> {{task.title}} </a>
+    <form method="get">
+        {{ form.status.label_tag }}
+        {{ form.status }}
+        <button type="submit">Hello</button>
+    </form>
         <p> {{task.status}} </p>
+        <a href="{% url 'task-detail' task.pk %}"> {{task.title}} </a>
         <p> {{task.priority}} </p>
+        <p> {{task.description}} </p>
     {% empty %}
         <p> No tasks</p>
     {% endfor %}
-</ul>
 {% endblock %}
