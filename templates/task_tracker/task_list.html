@@ -1,16 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for task in tasks %}
     <form method="get">
         {{ form.status.label_tag }}
         {{ form.status }}
         <button type="submit">Hello</button>
     </form>
+
+
+    {% for task in tasks %}
+        <h1> {{task.group}} </h1>
         <p> {{task.status}} </p>
         <a href="{% url 'task-detail' task.pk %}"> {{task.title}} </a>
         <p> {{task.priority}} </p>
+
         <p> {{task.description}} </p>
+        <p>- {{task.author}} </p>
+
+
     {% empty %}
         <p> No tasks</p>
     {% endfor %}
