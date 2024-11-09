@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Task
+from .models import Task, Groups, Comments
 from .forms import TaskForm, TaskFilterForm, CommentForm
 from .mixins import UserIsOwnerMixin
 
@@ -63,8 +63,8 @@ class TaskUpdateView(LoginRequiredMixin, UserIsOwnerMixin, UpdateView):
         form.instance.creator = self.request.user
         return super().form_valid(form)
 
-class CommentDeletView(LoginRequiredMixin, UserIsOwnerMixin, DeletView):
-    model = models.Comment
+class CommentDeletView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
+    model = Comments
 
     def get_queryset(self):
         queryset = super().get_queryset()
